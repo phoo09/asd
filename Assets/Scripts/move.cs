@@ -16,7 +16,7 @@ public class move : MonoBehaviour
     public float z = Random.Range(-2f, 2f);
     public Rigidbody Rigidbody;
     public GameObject obj;
-    public 
+    public float LifeTime = 10f;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +26,7 @@ public class move : MonoBehaviour
 
         y = Random.Range(-3f, 3f);
         x = Random.Range(-3f, 3f);
+        LifeTime = 10f;
 
     }
 
@@ -41,8 +42,12 @@ public class move : MonoBehaviour
 
         Rigidbody.velocity = new Vector3(x, y, 0);
 
-
-
+        LifeTime -= Time.deltaTime;
+        if (LifeTime < 0)
+        {
+            LifeTime += 10;
+            Destroy(this.gameObject);
+        }
 
         transform.Translate(start * Time.deltaTime);
 
@@ -93,7 +98,7 @@ public class move : MonoBehaviour
             x = -x;
             Rigidbody.velocity = new Vector3(x, y, 0);
 
-            Instantiate(obj);
+            Instantiate(obj, new Vector3(0, 10.5f, 0), Quaternion.identity);
 
         }
         if (collision.collider.gameObject.CompareTag("top"))
@@ -102,8 +107,12 @@ public class move : MonoBehaviour
 
             y = -y;
             Rigidbody.velocity = new Vector3(x, y, 0);
-            Instantiate(obj);
+            Instantiate(obj, new Vector3(0, 10.5f, 0), Quaternion.identity);
 
+        }
+        if (collision.collider.gameObject.CompareTag("top"))
+        {
+            
         }
     }
 }
