@@ -146,10 +146,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe681113ee8a504c9144eab973a104f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0
+  Speed: 1
+  speed: 0
   start: {x: 0, y: 0, z: 0}
   asd: {x: 0, y: 0, z: 0}
   x: 0
   y: 0
   z: 0
+  Rigidbody: {fileID: 1004440535305582946}
   obj: {fileID: 2151255711136015253}
