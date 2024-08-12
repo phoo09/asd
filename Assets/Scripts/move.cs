@@ -7,13 +7,13 @@ public class move : MonoBehaviour
 {
     
 
-    public float Speed = Random.Range(1f,2f);
+    public float Speed;
     public float speed;
     public Vector3 start;
     public Vector3 asd;
-    public float x = Random.Range(-3f, 3f);
-    public float y = Random.Range(-3f, 3f);
-    public float z = Random.Range(-2f, 2f);
+    public float x;
+    public float y;
+    public float z;
     public Rigidbody Rigidbody;
     public GameObject obj;
     public float LifeTime = 10f;
@@ -23,7 +23,7 @@ public class move : MonoBehaviour
     {
 
         Rigidbody = GetComponent<Rigidbody>();
-
+        Speed = Random.Range(1f, 2f);
         y = Random.Range(-3f, 3f);
         x = Random.Range(-3f, 3f);
         LifeTime = 10f;
