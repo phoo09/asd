@@ -6,17 +6,14 @@ using UnityEngine;
 public class move : MonoBehaviour
 {
     
-
     public float Speed;
     public float speed;
-    public Vector3 start;
-    public Vector3 asd;
     public float x;
     public float y;
-    public float z;
     public Rigidbody Rigidbody;
     public GameObject obj;
-    public float LifeTime = 10f;
+    public float LifeTime;
+    public float end=2;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +23,7 @@ public class move : MonoBehaviour
         Speed = Random.Range(1f, 2f);
         y = Random.Range(-3f, 3f);
         x = Random.Range(-3f, 3f);
-        LifeTime = 10f;
+        
 
     }
 
@@ -42,51 +39,26 @@ public class move : MonoBehaviour
 
         Rigidbody.velocity = new Vector3(x, y, 0);
 
-        LifeTime -= Time.deltaTime;
-        if (LifeTime < 0)
-        {
-            LifeTime += 10;
-            Destroy(this.gameObject);
-        }
+        //LifeTime -= Time.deltaTime;
+        //if (LifeTime < 0){LifeTime += 10;Destroy(this.gameObject);}
+        if(Input.GetKeyDown(KeyCode.Space)){Rigidbody.velocity = Vector3.zero;}
 
-        transform.Translate(start * Time.deltaTime);
+        if(Input.GetKey(KeyCode.W)){Rigidbody.velocity += Vector3.up * Speed;}
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Rigidbody.velocity = Vector3.zero;
-        }
+        if (Input.GetKey(KeyCode.S)){Rigidbody.velocity += Vector3.down * Speed;}
 
-        if(Input.GetKey(KeyCode.W))
-        {
-            Rigidbody.velocity += Vector3.up * Speed;
-        }
+        if (Input.GetKey(KeyCode.A)){Rigidbody.velocity += Vector3.left * Speed;}
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            Rigidbody.velocity += Vector3.down * Speed;
-        }
+        if (Input.GetKey(KeyCode.D)){Rigidbody.velocity += Vector3.right * Speed;}
 
-        if (Input.GetKey(KeyCode.A))
-        {
-            Rigidbody.velocity += Vector3.left * Speed;
-        }
+        if (Input.GetKeyDown(KeyCode.R)){transform.position = new Vector3(0, 10.5f, 0);}
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            Rigidbody.velocity += Vector3.right * Speed;
-        }
+        if (Input.GetKeyDown(KeyCode.Q)){ x = Random.Range(1, 5);}
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            transform.position = new Vector3(0, 10.5f, 0);
-        }
+        if(LifeTime >= end) { Destroy(this.gameObject); }
+        if (x <= 1 && x >= -1) { x = x * 2; }
+        if (y <= 1 && y >= -1) { y = y * 2; }
 
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            x = Random.Range(1, 5);
-        }
-
-        
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -97,9 +69,8 @@ public class move : MonoBehaviour
 
             x = -x;
             Rigidbody.velocity = new Vector3(x, y, 0);
-
             Instantiate(obj, new Vector3(0, 10.5f, 0), Quaternion.identity);
-
+            LifeTime = LifeTime + 1;
         }
         if (collision.collider.gameObject.CompareTag("top"))
         {
@@ -108,11 +79,9 @@ public class move : MonoBehaviour
             y = -y;
             Rigidbody.velocity = new Vector3(x, y, 0);
             Instantiate(obj, new Vector3(0, 10.5f, 0), Quaternion.identity);
+            LifeTime = LifeTime + 1;
 
-        }
-        if (collision.collider.gameObject.CompareTag("top"))
-        {
-            
+
         }
     }
 }

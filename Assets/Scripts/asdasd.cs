@@ -5,7 +5,7 @@ using UnityEngine;
 public class asdasd : MonoBehaviour
 {
 
-    public float asd;
+    public float asd=1;
 
     // Start is called before the first frame update
     void Start()
@@ -16,7 +16,7 @@ public class asdasd : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject[] gos = GameObject.FindGameObjectsWithTag("boll");
+
         
     }
 }
